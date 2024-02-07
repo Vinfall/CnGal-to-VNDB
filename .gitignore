@@ -1,0 +1,3 @@
+*.json
+output/*
+!output/.gitkeep
