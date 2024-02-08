@@ -27,8 +27,9 @@ python zh-rel-on-vndb.py -p 7 -s 1
 # Get every zh-Hans & zh-Hant releases
 python zh-rel-on-vndb.py -p 14 -s 0
 
+# Diff CnGal & VNDB data
 # Perform a fuzzy comparison
-python diff-cngal-vndb.py
+python diff-cngal-vndb.py -m 75 -n 50
 ```
 
 Output:
@@ -42,6 +43,7 @@ Output:
 
 - [x] Add glob support in `cngal-data-format.py`
 - [x] Make Steam filter optional in `zh-rel-on-vndb.py` for better fuzzy finding
+- [ ] Sort fuzzy output descendingly by similarity
 - [ ] Make metadata more informative
 
 ## [License](LICENSE)

@@ -84,6 +84,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "-s",
     "--steam",
+    type=bool,
     required=False,
     default=False,
     help="whether to match Steam releases only, boolean",
