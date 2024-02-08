@@ -15,7 +15,7 @@ This is a very simple implementation of the initial filtering solution I describ
 
 ## Todo
 
-- [ ] Add blob support in `cngal-data-format.py`
+- [x] Add glob support in `cngal-data-format.py`
 - [ ] Discard Steam filter since I use a fuzzy finder now
 - [ ] Make metadata more informative
 
