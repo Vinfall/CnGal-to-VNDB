@@ -4,6 +4,7 @@
 # Documentation
 # VNDB API v2 (Kana): https://api.vndb.org/kana#post-release
 
+import argparse
 import os
 import sys
 import requests
@@ -12,7 +13,7 @@ import csv
 import re
 
 """
-This script filters zh-Hans & zh-Hant Steam releases on VNDB whose parent VN has an original Chinese language.
+This script filters zh-Hans & zh-Hant releases on VNDB whose parent VN has an original Chinese language.
 """
 
 # Output files
@@ -52,10 +53,11 @@ fields = "id, title, alttitle, released, vns.id, platforms, producers.name, prod
 # To get normalized filters from compact one:
 # curl https://api.vndb.org/kana/release --json '{"filters":my_filters,"normalized_filters":true,"results":0}'
 
-# Alternatively, use compact filter to get rid of all weirdness
-# Side effect: no time shift
+# Use compact filter to get rid of all weirdness
 # filters = "04122wzh_dHans-2wzh_dHant-gwcomplete-N48123wzh_dHans-3wzh_dHant-jwsteam-"
+filters_zh = "03122wzh_dHans-2wzh_dHant-gwcomplete-N48123wzh_dHans-3wzh_dHant-"
 
+# Or use lengthy filters
 default_filters = [
     "and",
     ["or", ["lang", "=", "zh-Hans"], ["lang", "=", "zh-Hant"]],
@@ -77,6 +79,26 @@ data = {
     "normalized_filters": True,
 }
 
+# Arguments for easy customization
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "-s",
+    "--steam",
+    required=False,
+    default=False,
+    help="whether to match Steam releases only, boolean",
+)
+# 7 is recommended for Steam releases and 14 otherwise
+parser.add_argument(
+    "-p",
+    "--max-page",
+    type=int,
+    required=False,
+    default=2,
+    help="max pages of query results, int",
+)
+args = parser.parse_args()
+
 
 def get_page(max_page, data):
     # Reasons not using /vn
@@ -85,7 +107,9 @@ def get_page(max_page, data):
     api_url = "https://api.vndb.org/kana/release"
     headers = {"Content-Type": "application/json"}
     all_results = []
-    data["filters"] = default_filters
+    # Parse parameter
+    if args.steam is not True:
+        data["filters"] = filters_zh
 
     for page in range(1, max_page + 1):
         data["page"] = page
@@ -177,5 +201,5 @@ def process_json(results):
 
 
 os.makedirs(_OUTPUT_FOLDER, exist_ok=True)
-j = get_page(7, data)
+j = get_page(args.max_page, data)
 results = process_json(j)
