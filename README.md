@@ -3,15 +3,15 @@
 ## Introduction
 
 This is a very simple implementation of the initial filtering solution I described on [VNDB discussion board](https://vndb.org/t20918.3). It involves three parts (not exactly the same as below due to technical limitations):
-1. compare VNDB release extlink (Steam) with CnGal SteamId, and pick up those CnGal entries without any matched VNDB release (missing Steam release or not released on Steam at all)
-2. compare VNDB alttitle with CnGal name, and again pick up CnGal entries
+1. compare VNDB release `extlink` (Steam) with CnGal `SteamId`, and pick up those CnGal entries without any matched VNDB release (missing Steam release or not released on Steam at all)
+2. compare VNDB `alttitle` with CnGal `name`, and again pick up CnGal entries
 3. compare release date (!), this could be wrong due to a bug on CnGal side, but the number of VNs you need to check would be significantly smaller I guess
 
 ## Components
 
 - [`zh-rel-on-vndb.py`](zh-rel-on-vndb.py): filter zh-Hans & zh-Hant releases on VNDB whose parent VN has an original Chinese language.
 - [`cngal-data-format.py`](cngal-data-format.py): make exported CnGal entries match the format of VNDB one. Exported JSON from [CnGal data page](https://www.cngal.org/data) is needed.
-- [`diff-cngal-vndb.py`](diff-cngal-vndb.py): compare CnGal data w/ VNDB existing Chinese VN, and devides the results for future proofings.
+- [`diff-cngal-vndb.py`](diff-cngal-vndb.py): compare CnGal data w/ VNDB existing Chinese VN, and divides the results for future proofing.
 
 ## Usage
 
@@ -43,7 +43,7 @@ Output:
 
 - [x] Add glob support in `cngal-data-format.py`
 - [x] Make Steam filter optional in `zh-rel-on-vndb.py` for better fuzzy finding
-- [ ] Sort fuzzy output descendingly by similarity
+- [ ] Sort fuzzy output descended by similarity
 - [ ] Make metadata more informative
 
 ## [License](LICENSE)
