@@ -53,6 +53,7 @@ python diff-cngal-vndb.py -m 75 -n 50
 - [x] Add glob support in `cngal-data-format.py`
 - [x] Make Steam filter optional in `zh-rel-on-vndb.py` for better fuzzy finding
 - [x] Add [Makefile](Makefile)
+- [ ] Use [VNDB database dump](https://vndb.org/d14#5) for more complete matching (or update filters *wisely*)
 - [ ] Sort fuzzy output descended by similarity
 - [ ] Make metadata more informative
 
