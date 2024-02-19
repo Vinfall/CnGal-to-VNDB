@@ -56,6 +56,7 @@ with open("output/vndb-release.json", "r", encoding="utf-8") as file:
     vndb_data = json.load(file)
 
 for cngal_item in cngal_data:
+    title_cngal = cngal_item["title"]
     title_matched = False
     match_threshold = args.match_threshold
     fuzzy_threshold = args.fuzzy_threshold
@@ -70,8 +71,20 @@ for cngal_item in cngal_data:
     else:
     """
     for vndb_item in vndb_data:
+        title_vndb = vndb_item["title"]
+        # Dummy match
+        if (
+            # Avoid wild mismatch like `仿` in `仿生人会梦见电子羊吗`
+            len(title_cngal) >= 4
+            and len(title_vndb) >= 4
+            # Full match
+            and (title_vndb in title_cngal or title_cngal in title_vndb)
+        ):
+            matching_titles.append(vndb_item)
+            title_matched = True
+            break
         # Fuzzy match
-        similarity = fuzz.token_sort_ratio(cngal_item["title"], vndb_item["title"])
+        similarity = fuzz.token_sort_ratio(title_cngal, title_vndb)
         if similarity >= match_threshold:
             matching_titles.append(vndb_item)
             title_matched = True
