@@ -15,6 +15,14 @@ This is a very simple implementation of the initial filtering solution I describ
 
 ## Usage
 
+### Easy Way
+
+Install Python & GNU Make, clone the repo and simply run `make`.
+Everything should be done now. Just check `output` for the results.
+To clean up the data and restart, run `make clean`.
+
+### Vanilla Way
+
 ```sh
 pip install -r requirements.txt
 
@@ -32,7 +40,8 @@ python zh-rel-on-vndb.py -p 14 -s 0
 python diff-cngal-vndb.py -m 75 -n 50
 ```
 
-Output:
+## Output
+
 - `cngal-releas-*`: formatted CnGal data
 - `vndb-release-*`: formatted VNDB data
 - `miss-*`: missing CnGal entries on VNDB, add these first
@@ -43,6 +52,7 @@ Output:
 
 - [x] Add glob support in `cngal-data-format.py`
 - [x] Make Steam filter optional in `zh-rel-on-vndb.py` for better fuzzy finding
+- [x] Add [Makefile](Makefile)
 - [ ] Sort fuzzy output descended by similarity
 - [ ] Make metadata more informative
 
