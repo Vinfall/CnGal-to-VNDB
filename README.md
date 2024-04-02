@@ -56,6 +56,7 @@ python diff-cngal-vndb.py -m 75 -n 50
 - [ ] Use [VNDB database dump](https://vndb.org/d14#5) for more complete matching (or update filters *wisely*)
 - [ ] Sort fuzzy output descended by similarity
 - [ ] Make metadata more informative
+- [ ] Support more metadata like producer, staff & character
 
 ## [License](LICENSE)
 
